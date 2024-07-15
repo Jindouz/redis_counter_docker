@@ -79,6 +79,8 @@ This file defines the services for Docker Compose:
 
 docker-compose.yml  
 ```
+version: "3.8"
+name: redis-counter
 services:
    redis:
      image: redislabs/redismod
@@ -86,15 +88,22 @@ services:
      ports:
        - '6379:6379'
    
+
+
    web:
-     build: .
-     container_name: web
-     ports:
-       - "5000:5000"
-     volumes:
-       - .:/code
-     depends_on:
-       - redis
+        build: .
+        image: jindouz/redis-counter:latest
+        container_name: web
+        ports:
+            - "5000:5000"
+        volumes:
+            - .:/code
+        depends_on:
+            - redis
+```
+```
+docker-compose pull jindouz/redis-counter:latest
+docker-compose up
 ```
 ### Requirements
 This file lists the Python dependencies:

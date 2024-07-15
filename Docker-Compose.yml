@@ -1,3 +1,5 @@
+version: "3.8"
+name: redis-counter
 services:
    redis:
      image: redislabs/redismod
@@ -9,6 +11,7 @@ services:
 
    web:
         build: .
+        image: jindouz/redis-counter:latest
         container_name: web
         ports:
             - "5000:5000"
